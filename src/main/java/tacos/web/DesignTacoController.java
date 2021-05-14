@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -18,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Taco;
+import tacos.data.IngredientRepository;
 
 import javax.validation.Valid;
 
@@ -28,7 +32,27 @@ import javax.validation.Valid;
 
 public class DesignTacoController {
 
+    private final IngredientRepository ingredientRepository;
+
+    @Autowired
+    public DesignTacoController(IngredientRepository ingredientRepository){
+        this.ingredientRepository=ingredientRepository;
+    }
+
+
     @ModelAttribute
+    public void addIngredientsToModel(Model model){
+        Iterable<Ingredient> ingredients= ingredientRepository.findAll();
+        Type[] types = Ingredient.Type.values();
+        for (Type t: types) {
+            model.addAttribute(t.toString().toLowerCase(),
+                    filterByType(ingredients,t));
+        }
+
+    }
+/*
+  //old
+  @ModelAttribute
     public void addIngredientsToModel(Model model){
         List<Ingredient> ingredients = Arrays.asList(
                 new Ingredient("WHTO","Wheat Tortilla",Type.WRAP),
@@ -47,7 +71,7 @@ public class DesignTacoController {
             model.addAttribute(t.toString().toLowerCase(),
                     filterByType(ingredients,t));
         }
-    }
+    }*/
 
 
     @GetMapping
@@ -66,8 +90,9 @@ public class DesignTacoController {
     }
 
 
-    private Iterable<Ingredient> filterByType(List<Ingredient> ingredients,Type type){
-        return ingredients.stream()
+    private Iterable<Ingredient> filterByType(Iterable<Ingredient> ingredients,Type type){
+        //this is kinda ugly
+        return StreamSupport.stream(ingredients.spliterator(),false)
                 .filter(x->x.getType().equals(type))
                 .collect(Collectors.toList());
     }

@@ -65,7 +65,7 @@ public class JdbcOrderRepository implements OrderRepository{
         List<Taco> tacos = order.getTacos();
         int i=0;
         for (Taco t: tacos) {
-            saveTaco(orderID,i++,Taco);
+            saveTaco(orderID,i++,t);
         }
 
         return order;

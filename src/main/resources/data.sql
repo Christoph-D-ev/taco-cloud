@@ -12,9 +12,9 @@ insert into Ingredient (id, name, type)
 insert into Ingredient (id, name, type)
                 values ('CARN', 'Carnitas', 'PROTEIN');
 insert into Ingredient (id, name, type)
-                values ('TMTO', 'Diced Tomatoes', 'VEGGIES');
+                values ('TMTO', 'Diced Tomatoes', 'VEGETABLE');
 insert into Ingredient (id, name, type)
-                values ('LETC', 'Lettuce', 'VEGGIES');
+                values ('LETC', 'Lettuce', 'VEGETABLE');
 insert into Ingredient (id, name, type)
                 values ('CHED', 'Cheddar', 'CHEESE');
 insert into Ingredient (id, name, type)

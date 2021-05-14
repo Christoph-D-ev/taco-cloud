@@ -6,9 +6,9 @@ create table if not exists Taco_Order(
     state varchar(50) not null,
     zip varchar(10) not null,
     cc_number varchar(16) not null,
-    cc_date varchar(5) not null,
-    cc-cvv varchar(3) not null,
-    placed_at timestamp no null
+    cc_expiration varchar(5) not null,
+    cc_cvv varchar(3) not null,
+    placed_at timestamp not null
 );
 
 create table if not exists Taco(

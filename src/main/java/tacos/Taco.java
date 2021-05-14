@@ -1,29 +1,35 @@
 package tacos;
 
 import lombok.Data;
-import tacos.data.IngredientRef;
 
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
+
 @Data
+@Entity
 public class Taco {
-    @NotNull
-    @Size(min=5,message = "Name must be longer than 5 characters")
-    private String name;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotNull
+    @Size(min=5,message = "Name must be longer than 4 characters")
+    private String name;
+
+    @ManyToMany
     @Size(min=1,message = "Add one Ingredient")
-    private List<IngredientRef> ingredients;
+    private List<Ingredient> ingredients;
 
     private Date createdAt = new Date();
 
-    private Long id;
-
-    public void addIngredient(Ingredient ingredient){
-        this.ingredients.add(new IngredientRef(ingredient.getId()));
+    @PrePersist
+    void createdAt(){
+        this.createdAt=new Date();
     }
-
 }

@@ -13,24 +13,27 @@ import org.springframework.web.bind.support.SessionStatus;
 import tacos.Order;
 import tacos.data.OrderRepository;
 
-import javax.validation.Valid;
+
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
-@SessionAttributes("tacoOrder")
+@SessionAttributes("order")
 public class OrderController {
 
     private OrderRepository orderRepository;
 
+    public OrderController(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
     @GetMapping("/current")
-    public String orderForm(Model model){
-        model.addAttribute("order",new Order());
+    public String orderForm(){
         return "orderForm";
     }
 
     @PostMapping
-    public String processOrder(@Valid Order order, Errors errors, SessionStatus session){
+    public String processOrder(Order order, Errors errors, SessionStatus session){
         if(errors.hasErrors()){
             return "orderForm";
         }

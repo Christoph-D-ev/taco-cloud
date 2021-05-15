@@ -16,7 +16,7 @@ public class RegistrationController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+
     public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -26,6 +26,8 @@ public class RegistrationController {
     public String registerForm(){
         return "registerForm";
     }
+
+
     @PostMapping
     public String processRegistration(RegistrationForm form){
         userRepository.save(form.toUser(passwordEncoder));

@@ -8,6 +8,7 @@ import tacos.data.IngredientRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Component
@@ -22,7 +23,10 @@ public class IngredientConverter implements Converter<String, Ingredient> {
     }
 
     @Override
-    public Ingredient convert(String s) {
-        return ingredientRepository.findById(s).orElse(null);
+    public Ingredient convert(String id) {
+
+        Optional<Ingredient> optionalIngredient = ingredientRepository.findById(id);
+        return optionalIngredient.isPresent() ?
+                optionalIngredient.get() : null;
     }
 }

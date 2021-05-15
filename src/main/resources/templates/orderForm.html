@@ -3,10 +3,12 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Taco Cloud</title>
-    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <link rel="stylesheet" th:href="@{/styles.css}" style="width:500px;height:600px;" />
 </head>
 
 <body>
+
+<form method="POST" th:action="@{/logout}">  <input type="submit" value="Logout"/></form>
 
 <form method="POST" th:action="@{/orders}" th:object="${order}">
     <h1>Order your taco creations!</h1>

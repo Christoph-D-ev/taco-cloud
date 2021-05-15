@@ -71,7 +71,7 @@ public class DesignTacoController {
 
     @PostMapping
     public String processDesign(
-            @Valid @ModelAttribute("taco") Taco taco, Errors errors,
+            @Valid Taco taco, Errors errors,
             @ModelAttribute Order order){
         if(errors.hasErrors()){
             return "redirect:/design";

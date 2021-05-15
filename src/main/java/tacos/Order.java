@@ -2,6 +2,7 @@ package tacos;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import tacos.security.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -44,6 +45,11 @@ public class Order implements Serializable {
 
     @ManyToMany
     private List<Taco> tacos= new ArrayList<>();
+
+
+
+    @ManyToOne
+    private User user;
 
     public void addTaco(Taco taco){
         this.tacos.add(taco);

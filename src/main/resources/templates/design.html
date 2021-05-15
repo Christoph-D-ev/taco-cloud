@@ -9,9 +9,9 @@
 
 <body>
 <h1>Design your taco!</h1>
-<img th:src="@{/images/taco.png}"/>
+<img th:src="@{/images/taco.png}" style="width:500px;height:600px;"/>
 
-<form method="POST" th:object="${design}">
+<form method="POST" th:object="${design}" th:action="@{/design}">
 
     <span class="validationError"
           th:if="${#fields.hasErrors('ingredients')}"
@@ -42,9 +42,9 @@
             </div>
         </div>
 
-        <div class="ingredient-group" id="veggies">
+        <div class="ingredient-group" id="vegetable">
             <h3>Determine your veggies:</h3>
-            <div th:each="ingredient : ${veggies}">
+            <div th:each="ingredient : ${vegetable}">
                 <input name="ingredients" type="checkbox" th:value="${ingredient.id}" />
                 <span th:text="${ingredient.name}">INGREDIENT</span><br/>
             </div>
